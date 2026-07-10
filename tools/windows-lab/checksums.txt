@@ -1,0 +1,5 @@
+36e2609b7ceefedcb978ce5c48caf9e0e5af83423717c4e2e3c1d7ebca8f62a5  dist.win10.zip  https://github.com/OpenVPN/tap-windows6/releases/download/9.27.0/dist.win10.zip
+7428ef0b17a5479e5f24f29b5d8dba0731bb8bfa24088f6ee40b1eed2f918533  dist.win7.zip  https://github.com/OpenVPN/tap-windows6/releases/download/9.27.0/dist.win7.zip
+8631f00013116388362cb06f3e6fd2c44c8e57d8f857033111f98feb34fa5bce  OpenSSH-Win64-7.7.2.zip  https://github.com/PowerShell/Win32-OpenSSH/releases/download/v7.7.2.0p1-Beta/OpenSSH-Win64.zip
+8075f6d889bcb27be6f52ed47081675e5bb8a5390f2f5bfe4ec27a2bb70cbf5e  Windows6.1-KB4490628-x64.msu  https://catalog.s.download.windowsupdate.com/c/msdownload/update/software/secu/2019/03/windows6.1-kb4490628-x64_d3de52d6987f7c8bdc2c015dca69eac96047c76e.msu
+99312df792b376f02e25607d2eb3355725c47d124d8da253193195515fe90213  Windows6.1-KB4474419-v3-x64.msu  https://catalog.s.download.windowsupdate.com/c/msdownload/update/software/secu/2019/09/windows6.1-kb4474419-v3-x64_b5614c6cea5cb4e198717789633dca16308ef79c.msu

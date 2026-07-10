@@ -1,0 +1,60 @@
+name: etherguard-winlab
+
+services:
+  windows:
+    image: docker.io/dockurr/windows:6.00
+    restart: "no"
+    stop_grace_period: 2m
+    environment:
+      VERSION: ${VERSION:-10l}
+      USERNAME: ${WINDOWS_USERNAME:-EtherGuard}
+      PASSWORD: ${WINDOWS_PASSWORD:?set WINDOWS_PASSWORD in .env.local}
+      CPU_CORES: ${CPU_CORES:-4}
+      RAM_SIZE: ${RAM_SIZE:-6G}
+      DISK_SIZE: ${DISK_SIZE:-40G}
+      DISK_FMT: qcow2
+      REMOVE: N
+      SAMBA: Y
+    devices:
+      - /dev/kvm
+      - /dev/net/tun
+    cap_add:
+      - NET_ADMIN
+    ports:
+      - 127.0.0.1:18006:8006
+      - 127.0.0.1:13389:3389/tcp
+      - 127.0.0.1:13389:3389/udp
+      - 127.0.0.1:12222:22
+      - 127.0.0.1:30001:30001/udp
+    volumes:
+      - ${STATE_DIR:-./state/win10-ltsc}:/storage
+      - ./shared:/shared
+      - ./oem:/oem:ro
+      - ./cache:/cache
+
+  linux-peer:
+    profiles:
+      - acceptance
+    image: docker.io/library/golang@sha256:c6a5b9308b3f3095e8fde83c8bf4d68bd101fce606c1a0a1394522542509dda9
+    restart: "no"
+    network_mode: service:windows
+    depends_on:
+      windows:
+        condition: service_started
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - /dev/net/tun
+    working_dir: /shared/src
+    command:
+      - bash
+      - -c
+      - >-
+        DEBIAN_FRONTEND=noninteractive apt-get update &&
+        apt-get install --yes --no-install-recommends iproute2 iputils-ping &&
+        go build -o /tmp/etherguard-go . &&
+        exec /tmp/etherguard-go -no-uapi -bind std -mode edge -config /shared/acceptance/linux.yaml
+    volumes:
+      - ./shared:/shared
+      - ./cache/go-mod:/go/pkg/mod
+      - ./cache/go-build:/root/.cache/go-build

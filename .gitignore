@@ -3,3 +3,12 @@ etherguard-go-vpp
 etherguard-go-static
 vendor
 .ipynb_checkpoints
+.worktrees/
+tools/windows-lab/.env.local
+tools/windows-lab/state/
+tools/windows-lab/shared/
+tools/windows-lab/cache/
+tools/windows-lab/artifacts/
+tools/windows-lab/oem/authorized_keys
+tools/windows-lab/oem/*.zip
+tools/windows-lab/oem/*.msi
